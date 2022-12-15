@@ -13,12 +13,16 @@ namespace MySalesStandSystem.Models
         public string name { get; set; }
         [Column(TypeName = "varchar(50)")]
         public string username { get; set; }
+
         [Column(TypeName = "varchar(50)")]
         public string password { get; set; }
         [Column(TypeName = "varchar(100)")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",ErrorMessage = "Incorrect format")]
         public string email { get; set; }
         public DateTime registrationDate { get; set; }
+
+        [Column(TypeName = "varchar(50)")]
+        public string rol { get; set; }
         public bool active { get; set; }
         public IEnumerable<SalesStand>? salesStands { get; set; }
     }

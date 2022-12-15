@@ -12,7 +12,7 @@ using MySalesStandSystem.Data;
 namespace MySalesStandSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221213132758_InitialMigration")]
+    [Migration("20221214043515_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -130,6 +130,10 @@ namespace MySalesStandSystem.Migrations
 
                     b.Property<DateTime>("registrationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("rol")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("username")
                         .IsRequired()

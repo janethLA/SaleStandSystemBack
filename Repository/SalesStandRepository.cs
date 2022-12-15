@@ -21,14 +21,13 @@ namespace MySalesStandSystem.Repository
 
         public SalesStand GetSalesStandById(int id)
         {
-            //return _context.categories.Find(id);
+           
             var salesStand = _context.salesStands.Where(c => c.id == id).Include(c => c.products).First();
             return salesStand;
         }
         public async Task<SalesStand> CreateSalesStandAsync(SalesStand salesStand)
         {
             await _context.salesStands.AddAsync(salesStand);
-            //await _context.Set<Cow>().AddAsync(cow);
             await _context.SaveChangesAsync();
             return salesStand;
         }
@@ -36,7 +35,6 @@ namespace MySalesStandSystem.Repository
         public async Task<bool> UpdateSalesStandAsync(SalesStand salesStand)
         {
             _context.Entry(salesStand).State = EntityState.Modified;
-            //_context.categories.Update(category);
             _context.SaveChangesAsync();
             return true;
         }
@@ -52,7 +50,6 @@ namespace MySalesStandSystem.Repository
                     string s = Convert.ToBase64String(fileBytes);
                     salesStand.image = fileBytes;
                     c.image = fileBytes;
-                    // act on the Base64 data
                 }
             }
            
@@ -72,7 +69,7 @@ namespace MySalesStandSystem.Repository
 
         public async Task<bool> DeleteSalesStandAsync(SalesStand salesStand)
         {
-            //var entity = await GetByIdAsync(id);
+        
             if (salesStand is null)
             {
                 return false;

@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
 using MySalesStandSystem.Repository;
+using System.Data;
 
 namespace MySalesStandSystem.Controllers
 {
@@ -48,6 +47,7 @@ namespace MySalesStandSystem.Controllers
 
         [HttpPut("{id}")]
         [ActionName(nameof(UpdateSalesStand))]
+        //[Authorize(Roles = ("seller"))]
         public async Task<ActionResult> UpdateSalesStand(int id, [FromForm] SalesStand salesStand, [FromForm] IFormFile? image)
         {
             await _salesStandRepository.UpdateSalesStandAsync(id,salesStand, image);
@@ -56,6 +56,7 @@ namespace MySalesStandSystem.Controllers
         }
 
         [HttpDelete("{id}")]
+        //[Authorize(Roles = ("seller"))]
         [ActionName(nameof(DeleteSalesStand))]
         public async Task<IActionResult> DeleteSalesStand(int id)
         {
@@ -79,6 +80,7 @@ namespace MySalesStandSystem.Controllers
 
 
         [HttpPost("/api/createSale")]
+        //[Authorize(Roles = ("seller"))]
         [ActionName(nameof(CreateSalesStand2))]
         public async Task<ActionResult<Product>> CreateSalesStand2([FromForm] SalesStand salesStand, [FromForm] IFormFile image)
         {

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "sMrD6+mOH5RM0TxfUObOfrQUD2ki7RG94s/KC8afph+et7SMI0vKNgjfF6kjp9lhWqh2CEjJU0PHWm0KMzo23A==",
+  "dgSpecHash": "JcPxsnT5/w2VHTvGEPtQbOFV9a6XGk3gpz4VieFu7HwfRcQEVP8EyzWoLHtx1JqjkxAcRIHIVPbNblsoWSNViA==",
   "success": true,
   "projectFilePath": "D:\\NICE\\proyectos\\ProyectoSocial\\MySalesStandSystem\\MySalesStandSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\JANETH\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\JANETH\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\JANETH\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\JANETH\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.12\\microsoft.aspnetcore.authentication.jwtbearer.6.0.12.nupkg.sha512",
     "C:\\Users\\JANETH\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\JANETH\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\JANETH\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",

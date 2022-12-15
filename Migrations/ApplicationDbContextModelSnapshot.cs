@@ -128,6 +128,10 @@ namespace MySalesStandSystem.Migrations
                     b.Property<DateTime>("registrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("rol")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
                     b.Property<string>("username")
                         .IsRequired()
                         .HasColumnType("varchar(50)");

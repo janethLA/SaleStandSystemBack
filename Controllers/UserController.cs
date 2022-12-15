@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
 using MySalesStandSystem.Repository;
+using System.Data;
 
 namespace MySalesStandSystem.Controllers
 {
@@ -55,7 +57,6 @@ namespace MySalesStandSystem.Controllers
             }
 
             if (!user.name.IsNullOrEmpty()) {
-                Console.WriteLine("**********************8"+user.name);
                 c.name = user.name;
             }
             if (!user.username.IsNullOrEmpty())
@@ -88,6 +89,7 @@ namespace MySalesStandSystem.Controllers
         }
 
         [HttpGet("/api/saleStandsByUser/{id}")]
+        //[Authorize(Roles = ("seller"))]
         [ActionName(nameof(getSaleStandsByUser))]
         public List<SalesStandOutput> getSaleStandsByUser(int id)
         {

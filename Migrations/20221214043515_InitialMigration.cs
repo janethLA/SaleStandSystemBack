@@ -22,6 +22,7 @@ namespace MySalesStandSystem.Migrations
                     password = table.Column<string>(type: "varchar(50)", nullable: false),
                     email = table.Column<string>(type: "varchar(100)", nullable: false),
                     registrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    rol = table.Column<string>(type: "varchar(50)", nullable: false),
                     active = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
