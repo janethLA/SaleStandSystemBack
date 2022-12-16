@@ -1,7 +1,7 @@
 ﻿using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
 
-namespace MySalesStandSystem.Repository
+namespace MySalesStandSystem.Interfaces
 {
     public interface IUserRepository
     {
@@ -9,7 +9,7 @@ namespace MySalesStandSystem.Repository
         Task<bool> DeleteUserAsync(User user);
         User GetUserById(int id);
         IEnumerable<User> GetUsers();
-        Task<bool> UpdateUserAsync(User user); 
+        Task<bool> UpdateUserAsync(User user);
         List<SalesStandOutput> getSaleStandsByUser(int id);
     }
 }

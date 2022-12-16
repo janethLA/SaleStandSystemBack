@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySalesStandSystem.Data;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
+using MySalesStandSystem.Utils;
 
 namespace MySalesStandSystem.Repository
 {
@@ -17,14 +19,13 @@ namespace MySalesStandSystem.Repository
 
         public User GetUserById(int id)
         {
-            //return _context.categories.Find(id);
             var user = _context.users.Where(c => c.id == id).Include(c => c.salesStands).First();
             return user;
         }
         public async Task<User> CreateUserAsync(User user)
         {
+            user.password = Encrypt.getSHA256(user.password);
             await _context.users.AddAsync(user);
-            //await _context.Set<Cow>().AddAsync(cow);
             await _context.SaveChangesAsync();
             return user;
         }
@@ -32,14 +33,12 @@ namespace MySalesStandSystem.Repository
         public async Task<bool> UpdateUserAsync(User user)
         {
             _context.Entry(user).State = EntityState.Modified;
-            //_context.categories.Update(category);
             _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<bool> DeleteUserAsync(User user)
         {
-            //var entity = await GetByIdAsync(id);
             if (user is null)
             {
                 return false;

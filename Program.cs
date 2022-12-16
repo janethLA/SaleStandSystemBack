@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MySalesStandSystem.Data;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Repository;
 using System.Text;
 using System.Text.Json.Serialization;

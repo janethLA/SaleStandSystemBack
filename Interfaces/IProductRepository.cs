@@ -1,6 +1,6 @@
 ﻿using MySalesStandSystem.Models;
 
-namespace MySalesStandSystem.Repository
+namespace MySalesStandSystem.Interfaces
 {
     public interface IProductRepository
     {

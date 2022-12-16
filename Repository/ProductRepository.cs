@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySalesStandSystem.Data;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Models;
 
 namespace MySalesStandSystem.Repository
@@ -21,8 +22,6 @@ namespace MySalesStandSystem.Repository
         public async Task<Product> CreateProductAsync(Product product)
         {
             await _context.products.AddAsync(product);
-            //await _context.Set<Cow>().AddAsync(cow);
-
             await _context.SaveChangesAsync();
             return product;
         }
@@ -36,7 +35,6 @@ namespace MySalesStandSystem.Repository
 
         public async Task<bool> DeleteProductAsync(Product product)
         {
-            //var entity = await GetByIdAsync(id);
             if (product is null)
             {
                 return false;

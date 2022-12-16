@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MySalesStandSystem.Input;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
 using MySalesStandSystem.Repository;
+using MySalesStandSystem.Utils;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -26,23 +28,25 @@ namespace MySalesStandSystem.Controllers
         public IActionResult Login(LoginUser userLogin)
         {
             var user = authenticate(userLogin);
-            if (user !=null) {
+            if (user != null)
+            {
                 var token = Generate(user);
 
-                return Ok(new UserAuthOutput(token,user.id,user.name, user.rol));
+                return Ok(new UserAuthOutput(token, user.id, user.name, user.rol));
             }
             return NotFound("Usuario no encontrado");
         }
         private User authenticate(LoginUser userLogin)
         {
             var currentUser = _userRepository.GetUsers().FirstOrDefault(
-                user => user.username == userLogin.username &&
-                       user.password == userLogin.password
-            );
-            if (currentUser == null) {
+               user => user.username == userLogin.username &&
+                      user.password == Encrypt.getSHA256(userLogin.password));
+            if (currentUser == null)
+            {
                 return null;
             }
             return currentUser;
+
         }
 
         private string Generate(User user)
@@ -72,5 +76,5 @@ namespace MySalesStandSystem.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
-   
+
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
-using MySalesStandSystem.Repository;
 using System.Data;
 
 namespace MySalesStandSystem.Controllers
@@ -26,6 +26,7 @@ namespace MySalesStandSystem.Controllers
             return _userRepository.GetUsers();
         }
 
+
         [HttpGet("{id}")]
         [ActionName(nameof(GetUserById))]
         public ActionResult<User> GetUserById(int id)
@@ -46,33 +47,6 @@ namespace MySalesStandSystem.Controllers
             return CreatedAtAction(nameof(GetUserById), new { id = user.id }, user);
         }
 
-        [HttpPut("{id}")]
-        [ActionName(nameof(UpdateUser))]
-        public async Task<ActionResult> UpdateUser(int id, User user)
-        {
-            var c = _userRepository.GetUserById(id);
-            if (c == null)
-            {
-                return NotFound();
-            }
-
-            if (!user.name.IsNullOrEmpty()) {
-                c.name = user.name;
-            }
-            if (!user.username.IsNullOrEmpty())
-            {
-                c.username = user.username;
-            }
-            if (!user.email.IsNullOrEmpty())
-            {
-                c.email = user.email;
-            }
-          
-            await _userRepository.UpdateUserAsync(c);
-            return NoContent();
-
-        }
-
         [HttpDelete("{id}")]
         [ActionName(nameof(DeleteUser))]
         public async Task<IActionResult> DeleteUser(int id)
@@ -88,8 +62,9 @@ namespace MySalesStandSystem.Controllers
             return NoContent();
         }
 
+
         [HttpGet("/api/saleStandsByUser/{id}")]
-        //[Authorize(Roles = ("seller"))]
+        [Authorize(Roles = ("seller"))]
         [ActionName(nameof(getSaleStandsByUser))]
         public List<SalesStandOutput> getSaleStandsByUser(int id)
         {

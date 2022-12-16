@@ -1,18 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySalesStandSystem.Data;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Models;
 using MySalesStandSystem.Output;
 
 namespace MySalesStandSystem.Repository
 {
-    public class SalesStandRepository: ISalesStandRepository
+    public class SalesStandRepository : ISalesStandRepository
     {
         protected readonly ApplicationDbContext _context;
         protected UserRepository _userRepository;
-        public SalesStandRepository( ApplicationDbContext context) {
+
+        public SalesStandRepository(ApplicationDbContext context)
+        {
             _context = context;
-           // _userRepository = userRepository;
-        } 
+        }
 
         public IEnumerable<SalesStand> GetSalesStands()
         {
@@ -21,12 +23,19 @@ namespace MySalesStandSystem.Repository
 
         public SalesStand GetSalesStandById(int id)
         {
-           
             var salesStand = _context.salesStands.Where(c => c.id == id).Include(c => c.products).First();
             return salesStand;
         }
-        public async Task<SalesStand> CreateSalesStandAsync(SalesStand salesStand)
+
+        public async Task<SalesStand> CreateSalesStandAsync(SalesStand salesStand, IFormFile image)
         {
+            using (var ms = new MemoryStream())
+            {
+                image.CopyTo(ms);
+                byte[] fileBytes = ms.ToArray();
+                string s = Convert.ToBase64String(fileBytes);
+                salesStand.image = fileBytes;
+            }
             await _context.salesStands.AddAsync(salesStand);
             await _context.SaveChangesAsync();
             return salesStand;
@@ -42,7 +51,8 @@ namespace MySalesStandSystem.Repository
         public async Task<bool> UpdateSalesStandAsync(int id, SalesStand salesStand, IFormFile? image)
         {
             var c = GetSalesStandById(id);
-            if (image !=null) {
+            if (image != null)
+            {
                 using (var ms = new MemoryStream())
                 {
                     image.CopyTo(ms);
@@ -52,7 +62,7 @@ namespace MySalesStandSystem.Repository
                     c.image = fileBytes;
                 }
             }
-           
+
             if (c == null)
             {
                 return false;
@@ -62,14 +72,14 @@ namespace MySalesStandSystem.Repository
             c.latitude = salesStand.latitude;
             c.longitude = salesStand.longitude;
             c.address = salesStand.address;
-           
+
             _context.SaveChanges();
             return true;
         }
 
         public async Task<bool> DeleteSalesStandAsync(SalesStand salesStand)
         {
-        
+
             if (salesStand is null)
             {
                 return false;

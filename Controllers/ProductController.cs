@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MySalesStandSystem.Interfaces;
 using MySalesStandSystem.Models;
-using MySalesStandSystem.Repository;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MySalesStandSystem.Controllers
